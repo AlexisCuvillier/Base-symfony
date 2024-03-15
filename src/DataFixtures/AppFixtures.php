@@ -69,7 +69,6 @@ class AppFixtures extends Fixture
             ->addGenre($genre2)
             ->addPay($pays2);
         $manager->persist($film3);
-
         $manager->flush();
     }
 }
