@@ -12,7 +12,7 @@ class QueryController extends AbstractController
     #[Route('/query', name: 'app_query')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $query = $entityManager->createQuery("SELECT f FROM App\Entity\Film f");
-        dump($query->getResult());
+       $query = $entityManager->createQuery("SELECT f FROM App\Entity\Film f");
+        return    dump($query->getResult());
     }
 }

@@ -12,6 +12,6 @@ class RepoController extends AbstractController
     #[Route('/repo')]
     public function index(FilmRepository $repository): Response
     {
-     dump($repository->findOneByTitre("Inescapable"));
+     return dump($repository->findOneByTitre("Inescapable"));
     }
 }
