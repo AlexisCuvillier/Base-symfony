@@ -15,7 +15,7 @@ class Genre
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 64)]
     private ?string $nom = null;
 
     #[ORM\ManyToMany(targetEntity: Film::class, mappedBy: 'genres')]
@@ -36,7 +36,7 @@ class Genre
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -51,7 +51,7 @@ class Genre
         return $this->films;
     }
 
-    public function addFilm(Film $film): static
+    public function addFilm(Film $film): self
     {
         if (!$this->films->contains($film)) {
             $this->films->add($film);
@@ -61,7 +61,7 @@ class Genre
         return $this;
     }
 
-    public function removeFilm(Film $film): static
+    public function removeFilm(Film $film): self
     {
         if ($this->films->removeElement($film)) {
             $film->removeGenre($this);
@@ -69,4 +69,11 @@ class Genre
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->nom;
+    }
+
+
 }

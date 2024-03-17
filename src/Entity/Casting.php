@@ -15,7 +15,7 @@ class Casting
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 128)]
     private ?string $libelle = null;
 
     #[ORM\ManyToMany(targetEntity: Film::class, mappedBy: 'realisateurs')]
@@ -40,7 +40,7 @@ class Casting
         return $this->libelle;
     }
 
-    public function setLibelle(string $libelle): static
+    public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
 
@@ -55,7 +55,7 @@ class Casting
         return $this->filmsRealises;
     }
 
-    public function addFilmsRealise(Film $filmsRealise): static
+    public function addFilmsRealise(Film $filmsRealise): self
     {
         if (!$this->filmsRealises->contains($filmsRealise)) {
             $this->filmsRealises->add($filmsRealise);
@@ -65,7 +65,7 @@ class Casting
         return $this;
     }
 
-    public function removeFilmsRealise(Film $filmsRealise): static
+    public function removeFilmsRealise(Film $filmsRealise): self
     {
         if ($this->filmsRealises->removeElement($filmsRealise)) {
             $filmsRealise->removeRealisateur($this);
@@ -82,7 +82,7 @@ class Casting
         return $this->filmsInterpretes;
     }
 
-    public function addFilmsInterprete(Film $filmsInterprete): static
+    public function addFilmsInterprete(Film $filmsInterprete): self
     {
         if (!$this->filmsInterpretes->contains($filmsInterprete)) {
             $this->filmsInterpretes->add($filmsInterprete);
@@ -92,12 +92,17 @@ class Casting
         return $this;
     }
 
-    public function removeFilmsInterprete(Film $filmsInterprete): static
+    public function removeFilmsInterprete(Film $filmsInterprete): self
     {
         if ($this->filmsInterpretes->removeElement($filmsInterprete)) {
             $filmsInterprete->removeActeur($this);
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->libelle;
     }
 }

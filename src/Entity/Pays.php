@@ -15,7 +15,7 @@ class Pays
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 128)]
+    #[ORM\Column(length: 64)]
     private ?string $nom = null;
 
     #[ORM\ManyToMany(targetEntity: Film::class, mappedBy: 'pays')]
@@ -36,7 +36,7 @@ class Pays
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -51,7 +51,7 @@ class Pays
         return $this->films;
     }
 
-    public function addFilm(Film $film): static
+    public function addFilm(Film $film): self
     {
         if (!$this->films->contains($film)) {
             $this->films->add($film);
@@ -61,12 +61,17 @@ class Pays
         return $this;
     }
 
-    public function removeFilm(Film $film): static
+    public function removeFilm(Film $film): self
     {
         if ($this->films->removeElement($film)) {
             $film->removePay($this);
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->nom;
     }
 }

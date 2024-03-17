@@ -60,7 +60,7 @@ class Film
         return $this->titre;
     }
 
-    public function setTitre(string $titre): static
+    public function setTitre(string $titre): self
     {
         $this->titre = $titre;
 
@@ -72,7 +72,7 @@ class Film
         return $this->annee;
     }
 
-    public function setAnnee(?int $annee): static
+    public function setAnnee(?int $annee): self
     {
         $this->annee = $annee;
 
@@ -84,7 +84,7 @@ class Film
         return $this->duree;
     }
 
-    public function setDuree(?int $duree): static
+    public function setDuree(?int $duree): self
     {
         $this->duree = $duree;
 
@@ -96,7 +96,7 @@ class Film
         return $this->synopsis;
     }
 
-    public function setSynopsis(?string $synopsis): static
+    public function setSynopsis(?string $synopsis): self
     {
         $this->synopsis = $synopsis;
 
@@ -111,7 +111,7 @@ class Film
         return $this->genres;
     }
 
-    public function addGenre(Genre $genre): static
+    public function addGenre(Genre $genre): self
     {
         if (!$this->genres->contains($genre)) {
             $this->genres->add($genre);
@@ -120,7 +120,7 @@ class Film
         return $this;
     }
 
-    public function removeGenre(Genre $genre): static
+    public function removeGenre(Genre $genre): self
     {
         $this->genres->removeElement($genre);
 
@@ -135,7 +135,7 @@ class Film
         return $this->pays;
     }
 
-    public function addPay(Pays $pay): static
+    public function addPay(Pays $pay): self
     {
         if (!$this->pays->contains($pay)) {
             $this->pays->add($pay);
@@ -144,7 +144,7 @@ class Film
         return $this;
     }
 
-    public function removePay(Pays $pay): static
+    public function removePay(Pays $pay): self
     {
         $this->pays->removeElement($pay);
 
@@ -159,7 +159,7 @@ class Film
         return $this->realisateurs;
     }
 
-    public function addRealisateur(Casting $realisateur): static
+    public function addRealisateur(Casting $realisateur): self
     {
         if (!$this->realisateurs->contains($realisateur)) {
             $this->realisateurs->add($realisateur);
@@ -168,7 +168,7 @@ class Film
         return $this;
     }
 
-    public function removeRealisateur(Casting $realisateur): static
+    public function removeRealisateur(Casting $realisateur): self
     {
         $this->realisateurs->removeElement($realisateur);
 
@@ -183,7 +183,7 @@ class Film
         return $this->acteurs;
     }
 
-    public function addActeur(Casting $acteur): static
+    public function addActeur(Casting $acteur): self
     {
         if (!$this->acteurs->contains($acteur)) {
             $this->acteurs->add($acteur);
@@ -192,10 +192,15 @@ class Film
         return $this;
     }
 
-    public function removeActeur(Casting $acteur): static
+    public function removeActeur(Casting $acteur): self
     {
         $this->acteurs->removeElement($acteur);
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->titre;
     }
 }
