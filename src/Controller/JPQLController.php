@@ -10,14 +10,14 @@ use Symfony\Component\Routing\Attribute\Route;
 class JPQLController extends AbstractController
 {
     /* 1. Tous les pays*/
-    #[Route('/allFilm', name: 'app_j_p_q_l')]
+    #[Route('/req1', name: 'app_j_p_q_l')]
     public function req1(EntityManagerInterface $entityManager): Response
     {
         $query = $entityManager->createQuery("SELECT p FROM App\Entity\Pays p");
         return dump($query->getResult());
     }
     /* Tous les genre par ordre alphabetique */
-    #[Route('/genreAlpha')]
+    #[Route('/req2')]
     public function req2(EntityManagerInterface $entityManager): Response
     {
         $query = $entityManager->createQuery("SELECT g FROM App\Entity\Genre g ORDER BY g.nom ASC");
@@ -25,7 +25,7 @@ class JPQLController extends AbstractController
     }
 
     /* Tous les film du genre horreur*/
-    #[Route('/filmHorreur')]
+    #[Route('/req3')]
     public function req3(EntityManagerInterface $entityManager): Response
     {
         $query = $entityManager->createQuery(
@@ -39,7 +39,7 @@ class JPQLController extends AbstractController
     }
 
     /* Les acteur du film 'The Thing' */
-    #[Route('/acteurFilm')]
+    #[Route('/req4')]
     public function req4(EntityManagerInterface $entityManager): Response
     {
         $query = $entityManager->createQuery(
@@ -52,16 +52,36 @@ class JPQLController extends AbstractController
         return dump($res);
     }
 
-    /* Tous les realisateurs du film Dracula */
-    #[Route('realFilm')]
+    /* Tous les film realiser par Woody Allen et du genre comedies */
+    #[Route('req5')]
     public function req5(EntityManagerInterface $entityManager): Response
     {
         $query = $entityManager->createQuery(
-            "SELECT c 
-            FROM App\Entity\Casting c
-            JOIN c.filmsRealises f
-            WHERE f.titre = :TITRE");
-        $query->setParameter('TITRE', 'Dracula');
+            "SELECT f 
+            FROM App\Entity\Film f
+            JOIN f.realisateurs r
+            JOIN f.genres g
+            WHERE r.libelle = :LIBELLE
+            AND g.nom = :NOM
+            ");
+        $query->setParameter('LIBELLE', 'Woody Allen');
+        $query->setParameter('NOM', 'Comédie');
+        $res = $query->getResult();
+        return dump($res);
+    }
+
+    /* Tous les realisateurs ayant tourne avec Bruce Lee */
+
+    #[Route('req6')]
+public function req6(EntityManagerInterface $entityManager): Response
+    {
+        $query = $entityManager->createQuery(
+            'SELECT r
+            FROM App\Entity\Casting r
+            JOIN r.filmsRealises f
+            JOIN f.acteurs a
+            WHERE a.libelle =:LIBELLE' );
+        $query->setParameter('LIBELLE','Bruce Lee');
         $res = $query->getResult();
         return dump($res);
     }
