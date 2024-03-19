@@ -29,15 +29,23 @@ class ResponseController extends AbstractController
 
     }
 
-    #[Route('/file', name: 'jsonResponse')]
+    #[Route('/file', name: 'fileResponse')]
     public function fileResponse()
     {
         return new BinaryFileResponse('../_FICHIERS/test-file.png');
     }
 
-    #[Route('/html', name: 'jsonResponse')]
+    #[Route('/html', name: 'htmlResponse')]
     public function htmlResponse()
     {
         return new Response('<h1>HELLO</h1>');
+    }
+
+    #[Route('/redirection')]
+    public function redirectionResponse()
+    {
+        #return $this->redirectToRoute('fileResponse'); //name de la route
+        return $this->redirect('/file'); // path de la route
+
     }
 }
