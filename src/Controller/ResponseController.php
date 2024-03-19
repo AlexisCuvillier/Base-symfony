@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ResponseController extends AbstractController
 {
-    #[Route('/render', name: 'render')]
+    #[Route('/render', name: 'faire-un-render')]
     public function renderResponse(FilmRepository $filmRepository): Response
     {
         $film = $filmRepository->find(6655);
@@ -44,8 +44,8 @@ class ResponseController extends AbstractController
     #[Route('/redirection')]
     public function redirectionResponse()
     {
-        #return $this->redirectToRoute('fileResponse'); //name de la route
-        return $this->redirect('/file'); // path de la route
+        #return $this->redirectToRoute('faire-un-render'); //name de la route
+        return $this->redirect('/render'); // path de la route
 
     }
 }
