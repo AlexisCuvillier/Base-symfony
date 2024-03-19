@@ -27,17 +27,17 @@ class ResponseController extends AbstractController
         #$film = $filmRepository->find(6655);
         return $this->json($film);
 
-
-
     }
 
     #[Route('/file', name: 'jsonResponse')]
     public function fileResponse()
     {
-
         return new BinaryFileResponse('../_FICHIERS/test-file.png');
+    }
 
-
-
+    #[Route('/html', name: 'jsonResponse')]
+    public function htmlResponse()
+    {
+        return new Response('<h1>HELLO</h1>');
     }
 }
