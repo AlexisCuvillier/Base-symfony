@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\FilmRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class JPQLController extends AbstractController
 {
-    /* 1. Tous les pays*/
+    /* 1. Tous les pays */
     #[Route('/req1', name: 'app_j_p_q_l')]
     public function req1(EntityManagerInterface $entityManager): Response
     {
@@ -53,7 +54,7 @@ class JPQLController extends AbstractController
     }
 
     /* Tous les film realiser par Woody Allen et du genre comedies */
-    #[Route('req5')]
+    #[Route('/req5')]
     public function req5(EntityManagerInterface $entityManager): Response
     {
         $query = $entityManager->createQuery(
@@ -72,7 +73,7 @@ class JPQLController extends AbstractController
 
     /* Tous les realisateurs ayant tourne avec Bruce Lee */
 
-    #[Route('req6')]
+    #[Route('/req6')]
 public function req6(EntityManagerInterface $entityManager): Response
     {
         $query = $entityManager->createQuery(

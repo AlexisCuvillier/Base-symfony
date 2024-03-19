@@ -19,12 +19,12 @@ class FilmRepository extends ServiceEntityRepository
     public function rechercherFilmParGenreEtPays($genre, $pays){
 
         $dql = "SELECT  f 
-                FROM    App:Film f 
+                FROM    App\Entity\Film f 
                         JOIN f.genres g
                         JOIN f.pays p
                 WHERE   g=:GENRE 
                         AND p=:PAYS";
-        return $this->_em->createQuery($dql)
+        return $this->getEntityManager()->createQuery($dql)
             ->setParameter('GENRE', $genre)
             ->setParameter('PAYS', $pays)
             ->getResult();
