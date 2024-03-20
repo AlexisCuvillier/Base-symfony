@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CookieController!{% endblock %}
+
+{% block body %}
+<style>
+    .rouge { background-color: black; color: #B0413E }
+    .vert { background-color: green }
+</style>
+
+<body class="{{ app.request.cookies.get('theme') }}">
+<h1>
+    Valeur du thème : {{ app.request.cookies.get('theme') }}
+</h1>
+</body>
+{% endblock %}
